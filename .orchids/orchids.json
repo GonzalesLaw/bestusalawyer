@@ -1,6 +1,6 @@
 {
   "startupCommands": [
-    "cd /home/user/app && npm install && npx serve . -l 3000"
+    "cd /home/user/app && npm install && npm start"
   ],
   "projectId": "640cfde0-6464-4aa4-a70a-8130993abd09",
   "templateId": "any"
