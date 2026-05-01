@@ -689,16 +689,32 @@
     body::before { content: none; }
     body::after  { content: none; }
 
-    #photo-bg {
+    /* ── YouTube Video Background ── */
+    #video-bg-wrap {
       position: fixed;
       inset: 0;
-      width: 100%;
-      height: 100%;
       z-index: -2;
       pointer-events: none;
-      background: url('bg.jpg') center 20% / cover no-repeat;
-      filter: blur(3px) brightness(0.28) saturate(0.6);
-      transform: scale(1.05);
+      overflow: hidden;
+      background: #07080f;
+    }
+    #video-bg-inner {
+      position: absolute;
+      /* Oversized to cover any aspect ratio */
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 56.25vw; /* 16:9 ratio */
+      min-width: 177.78vh; /* 16:9 ratio */
+      min-height: 100vh;
+      transform: translate(-50%, -50%);
+    }
+    #yt-bg {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: blur(5px) brightness(0.20) saturate(0.5);
+      transform: scale(1.08); /* hide blur edges */
     }
 
     #photo-bg-overlay {
@@ -1412,8 +1428,19 @@
     })();
   </script>
 
-  <!-- ═══ Photo Background ═══ -->
-  <div id="photo-bg"></div>
+  <!-- ═══ YouTube Video Background ═══ -->
+  <div id="video-bg-wrap">
+    <div id="video-bg-inner">
+      <iframe
+        id="yt-bg"
+        src="https://www.youtube.com/embed/hEhvDnPBJ7I?autoplay=1&mute=1&loop=1&playlist=hEhvDnPBJ7I&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&vq=hd1080"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        title="background video"
+      ></iframe>
+    </div>
+  </div>
   <div id="photo-bg-overlay"></div>
 
   <!-- ═══ LA Skyline Background (hidden) ═══ -->
@@ -3427,7 +3454,7 @@
     body {
       background: #07080f !important;
     }
-    #photo-bg {
+    #yt-bg {
       filter: blur(6px) brightness(0.18) saturate(0.4) !important;
     }
     #photo-bg-overlay {
