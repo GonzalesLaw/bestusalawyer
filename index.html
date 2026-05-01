@@ -337,18 +337,37 @@
       overflow-x: hidden;
     }
 
-    /* ── LA skyline background ── */
-    #la-bg {
+    /* ── Photo background ── */
+    #la-bg { display: none; }
+
+    body::before { content: none; }
+    body::after  { content: none; }
+
+    #photo-bg {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: -2;
       pointer-events: none;
+      background: url('bg.jpg') center 20% / cover no-repeat;
+      filter: blur(3px) brightness(0.28) saturate(0.6);
+      transform: scale(1.05);
     }
 
-    body::before { content: none; }
-    body::after  { content: none; }
+    #photo-bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(to bottom,
+          rgba(8,10,18,0.60) 0%,
+          rgba(8,10,18,0.25) 35%,
+          rgba(8,10,18,0.65) 100%),
+        radial-gradient(ellipse 80% 50% at 50% 0%,
+          rgba(196,39,39,0.09) 0%, transparent 70%);
+    }
 
     /* ══════════════════════════════════════════
        TOP BANNER
@@ -859,7 +878,11 @@
 </head>
 <body>
 
-  <!-- ═══ LA Skyline Background ═══ -->
+  <!-- ═══ Photo Background ═══ -->
+  <div id="photo-bg"></div>
+  <div id="photo-bg-overlay"></div>
+
+  <!-- ═══ LA Skyline Background (hidden) ═══ -->
   <svg id="la-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
     <defs>
       <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
